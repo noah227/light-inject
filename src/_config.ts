@@ -1,6 +1,7 @@
 import {TExtraBind} from "./_core";
 
 export type TInjectType = "js" | "css"
+export type TInjectTarget = keyof HTMLElementTagNameMap | HTMLElement
 type TInjectConfig = {
     [k in TInjectType]: {
         tagName: string

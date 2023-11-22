@@ -1,3 +1,5 @@
+import {TInjectTarget} from "./_config";
+
 export type TExtraBind = { [index: string]: any }
 export type TCreatedEl = HTMLScriptElement | HTMLLinkElement
 
@@ -27,8 +29,10 @@ export const _bindExtra = (el: TCreatedEl, extraBind?: TExtraBind) => {
     }
     return el
 }
-export const _addToDocument = (el: TCreatedEl) => {
-    document.head.appendChild(el)
+export const _addToDocument = (el: TCreatedEl, injectTo?: TInjectTarget) => {
+    const target = injectTo ? (typeof injectTo === "string" ? document.querySelector(injectTo) : injectTo) : document.head
+    if(target) target.appendChild(el)
+    else throw new Error(`Inject failed, can't find target dom to inject! You may passed Incorrect params!`)
 }
 
 export default {
